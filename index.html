@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The ultimate guide to content creation chaos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ckeditor5/40.2.0/ckeditor.min.js"></script>
+    <style>:root
+    {
+      --io-blue: #0000D2;
+      --io-dark-blue: #02028dff;
+      --io-beige: #DCCFC2;
+      --io-pink: #DCC8C2;
+      --io-grey: #C3D1CE;
+      --io-off-white: #EBE8E3;
+      --io-dark-grey: #242424;
+      --io-mid-grey: #747474;
+      --io-light-grey: #F4F4F4;
+      --io-white: #ffffff;
+      --io-black: #000000;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible,
+    a:focus-visible {
+      outline-offset: 4px;
+    }
+
+    body {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 400;
+      line-height: 150%;
+      color: var(--io-dark-grey);
+      background-color: var(--io-off-white);
+      font-size: 16px;
+      padding-block: 3rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .visually-hidden {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      margin: -1px !important;
+      padding: 0 !important;
+      overflow: hidden !important;
+      clip: rect(0, 0, 0, 0) !important;
+      border: 0 !important;
+      white-space: nowrap !important;
+    }
+
+    /* Typography following modular scale (Major Third - 1.25) */
+    h1 {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700;
+      font-size: 3rem; /* 48px */
+      line-height: 110%;
+      color: var(--io-blue);
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    h2 {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 500;
+      font-size: 2rem; /* 32px */
+      line-height: 110%;
+      margin-block: 2rem;
+    }
+
+    h3 {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 500;
+      font-size: 1.563rem; /* 25px */
+      line-height: 110%;
+      margin: 2rem 0 1.25rem;
+    }
+
+    .subtitle {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 300;
+      font-size: 1.25rem; /* 20px */
+      line-height: 150%;
+      color: var(--io-mid-grey);
+      margin-bottom: 2rem;
+      max-width: 600px;
+    }
+
+    p {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 400;
+      font-size: 1rem; /* 16px */
+      line-height: 150%;
+      color: var(--io-dark-grey);
+      margin-bottom: 24px;
+      max-width: 65ch;
+    }
+
+    .large-text {
+      font-size: 1.25rem; /* 20px */
+      font-weight: 500;
+    }
+
+    .exercise:nth-child(even) {
+      background-color: var(--io-pink);
+      padding-block: 3rem;
+    }
+
+    /* Image containers with proper spacing */
+    .image-container {
+      margin: 2rem 0;
+      text-align: center;
+    }
+
+    .content-image {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease;
+    }
+
+    .content-image:hover {
+      transform: scale(1.02);
+    }
+
+    /* Image upload forms */
+    .image-upload-form {
+      background-color: var(--io-white);
+      border: 2px dashed var(--io-blue);
+      border-radius: 12px;
+      padding: 40px;
+      text-align: center;
+      margin: 2rem 0;
+    }
+
+    .form-group {
+      margin-bottom: 30px;
+    }
+
+    .form-label {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 500;
+      font-size: 1rem;
+      color: var(--io-dark-grey);
+      display: block;
+      margin-bottom: 8px;
+      text-align: left;
+    }
+
+    .file-input-wrapper {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .file-input {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      inset: 0;
+      cursor: pointer;
+    }
+
+    .file-input-button {
+      background-color: var(--io-light-grey);
+      border: 2px solid var(--io-mid-grey);
+      border-radius: 8px;
+      padding: 20px 30px;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 500;
+      color: var(--io-dark-grey);
+      pointer-events: none;
+      transition: all 0.3s ease;
+      display: block;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .file-input-button:hover {
+      background-color: var(--io-beige);
+      border-color: var(--io-blue);
+    }
+
+    .text-input {
+      width: 100%;
+      padding: 15px;
+      border: 2px solid var(--io-mid-grey);
+      border-radius: 8px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 1rem;
+      background-color: var(--io-white);
+      transition: border-color 0.3s ease;
+    }
+
+    .text-input:focus {
+      border-color: var(--io-blue);
+    }
+
+    .text-input:disabled {
+      background-color: var(--io-light-grey);
+      color: var(--io-mid-grey);
+      border-color: var(--io-light-grey);
+      cursor: not-allowed;
+    }
+
+    .checkbox-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      margin: 20px 0;
+      text-align: left;
+    }
+
+    .checkbox-input {
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+      accent-color: var(--io-blue);
+    }
+
+    .checkbox-label {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 400;
+      font-size: 1rem;
+      color: var(--io-dark-grey);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .decorative-info {
+      background-color: var(--io-light-grey);
+      padding: 15px;
+      border-radius: 6px;
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: var(--io-mid-grey);
+      display: none;
+    }
+
+    .submit-button {
+      background-color: var(--io-blue);
+      color: var(--io-white);
+      border: none;
+      border-radius: 8px;
+      padding: 15px 30px;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 500;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .submit-button:hover {
+      background-color: var(--io-dark-grey);
+      transform: translateY(-2px);
+    }
+
+    .submit-button:disabled {
+      background-color: var(--io-mid-grey);
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .file-name {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: var(--io-mid-grey);
+      font-style: italic;
+    }
+
+    .uploaded-image {
+      display: none;
+    }
+
+    /* CKEditor section styles */
+    .editor-container {
+      background-color: var(--io-white);
+      border-radius: 12px;
+      padding: 40px;
+      margin: 60px 0;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      color: var(--io-dark-grey);
+    }
+
+    .editor-container ul,
+    .editor-container ol {
+      padding-inline-start: 2rem;
+    }
+
+    .editor-instructions {
+      background-color: var(--io-light-grey);
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+      border-left: 4px solid var(--io-blue);
+    }
+
+    .editor-instructions p {
+      margin-bottom: 10px;
+      max-width: none;
+    }
+
+    .editor-output {
+      margin-top: 40px;
+      padding: 30px;
+      background-color: var(--io-off-white);
+      border-radius: 8px;
+      border: 2px solid var(--io-beige);
+      display: none;
+    }
+
+    .editor-output h2,
+    .editor-output h3,
+    .editor-output h4,
+    .editor-output h5,
+    .editor-output h6 {
+      font-family: 'Manrope', sans-serif;
+      color: var(--io-dark-grey);
+    }
+
+    .editor-output h2 {
+      font-size: 2rem;
+      font-weight: 500;
+      margin: 30px 0 20px;
+    }
+
+    .editor-output h3 {
+      font-size: 1.5rem;
+      font-weight: 500;
+      margin: 25px 0 15px;
+    }
+
+    .editor-output h4 {
+      font-size: 1.25rem;
+      font-weight: 500;
+      margin: 20px 0 10px;
+    }
+
+    .editor-output h5 {
+      font-size: 1.125rem;
+      font-weight: 500;
+      margin: 15px 0 8px;
+    }
+
+    .editor-output h6 {
+      font-size: 1rem;
+      font-weight: 500;
+      margin: 10px 0 5px;
+    }
+
+    .editor-output ul,
+    .editor-output ol {
+      margin: 15px 0;
+      padding-left: 30px;
+    }
+
+    .editor-output li {
+      margin: 8px 0;
+      line-height: 150%;
+    }
+
+    .editor-output a {
+      color: var(--io-blue);
+      text-decoration: underline;
+      font-weight: 500;
+    }
+
+    .editor-output a:hover {
+      background-color: var(--io-beige);
+      padding: 2px 4px;
+      border-radius: 3px;
+    }
+
+    .ck-editor__editable {
+      min-height: 26rem;
+    }
+
+    .generate-button {
+      background-color: var(--io-blue);
+      color: var(--io-white);
+      border: 2px solid var(--io-blue);
+      border-radius: 8px;
+      padding: 15px 30px;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 500;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 20px;
+    }
+
+    .generate-button:hover {
+      background-color: var(--io-dark-blue);
+      transform: translateY(-2px);
+    }
+
+    /* Content sections following iO spacing principles */
+    .section {
+      margin: 3rem 0;
+    }
+
+    .section:nth-child(odd) {
+      background-color: var(--io-white);
+      padding: 3rem;
+    }
+
+    /* Highlighted content boxes */
+    .highlight-box {
+      background-color: var(--io-beige);
+      padding: 40px;
+      margin: 40px 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--io-blue);
+    }
+
+    .highlight-box p {
+      max-width: none;
+    }
+
+    /* Warning/callout boxes */
+    .callout-box {
+      background-color: var(--io-pink);
+      padding: 30px;
+      margin: 40px 0;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .callout-box p {
+      font-weight: 500;
+      max-width: none;
+      margin-bottom: 0;
+    }
+
+    /* Lists with proper spacing */
+    .tips-list {
+      background-color: var(--io-light-grey);
+      padding: 40px;
+      margin: 40px 0;
+      border-radius: 8px;
+    }
+
+    .tips-list ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .tips-list li {
+      padding: 12px 0 12px 40px;
+      position: relative;
+      border-bottom: 1px solid var(--io-off-white);
+    }
+
+    .tips-list li:last-child {
+      border-bottom: none;
+    }
+
+    .tips-list li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--io-blue);
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+
+    /* Ordered lists */
+    .law-list {
+      counter-reset: law-counter;
+      list-style: none;
+      padding: 0;
+    }
+
+    .law-list li {
+      counter-increment: law-counter;
+      margin: 30px 0;
+      padding-left: 60px;
+      position: relative;
+    }
+
+    .law-list li::before {
+      content: counter(law-counter);
+      position: absolute;
+      left: 0;
+      top: 0;
+      background-color: var(--io-blue);
+      color: var(--io-white);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+
+    /* Emphasis text */
+    .highlight {
+      background-color: var(--io-blue);
+      color: var(--io-white);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+
+    .text-blue {
+      color: var(--io-blue);
+      font-weight: 500;
+    }
+
+    /* Footer */
+    .footer {
+      background-color: var(--io-dark-grey);
+      color: var(--io-white);
+      padding: 60px;
+      margin: 100px 0 0;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .footer p {
+      color: var(--io-white);
+      max-width: none;
+    }
+
+    .footer .large-text {
+      font-size: 1.563rem;
+      margin-bottom: 30px;
+    }
+
+    /* Responsive design */
+    @media(max-width: 768px) {
+      .container {
+        padding-inline: 20px;
+      }
+
+      h1 {
+        font-size: 2.441rem;
+      }
+
+      h2 {
+        font-size: 1.953rem;
+      }
+
+      .highlight-box,
+      .callout-box,
+      .tips-list {
+        padding: 30px;
+      }
+
+      .law-list li {
+        padding-left: 50px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Accessible Content Creation</h1>
+      <p class="subtitle">Building content that works for everyone.</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="exercise">
+      <div class="container">
+        <h2>Exercise 1: Images and alt text</h2>
+      </div>
+      <section class="section">
+        <div class="container">
+          <h3>1.1 Choosing the right font-family</h3>
+
+          <form class="image-upload-form" id="chapter1-form">
+            <div class="form-group">
+              <label class="form-label" for="chapter1-image">Upload an image related to typography</label>
+              <div class="file-input-wrapper">
+                <input type="file" id="chapter1-image" class="file-input" accept="image/*" required>
+                <span class="file-input-button">📁 Choose image 1 in folder "Exercise 1"</span>
+              </div>
+              <div class="file-name" id="chapter1-filename"></div>
+            </div>
+            <div class="checkbox-wrapper">
+              <input type="checkbox" id="chapter1-decorative" class="checkbox-input">
+              <label for="chapter1-decorative" class="checkbox-label">Decorative image (no alt text needed)</label>
+            </div>
+
+            <div class="decorative-info" id="chapter1-info">
+              ℹ️ Decorative images are purely visual and don't add information to the content. They get an empty alt attribute (alt="") which tells screen readers to skip them.
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="chapter1-alt">Alternative text (describe the image)</label>
+              <input type="text" id="chapter1-alt" class="text-input" placeholder="E.g., 'Typography showcase showing different font families'" required>
+            </div>
+            <button type="submit" class="submit-button">Add image to 1.1</button>
+          </form>
+
+          <div class="image-container uploaded-image" id="chapter1-image-container">
+            <img id="chapter1-display" class="content-image" alt="">
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <h3>1.2 Creating the right atmosphere</h3>
+
+          <form class="image-upload-form" id="chapter2-form">
+            <div class="form-group">
+              <label class="form-label" for="chapter2-image">Upload an atmospheric image</label>
+              <div class="file-input-wrapper">
+                <input type="file" id="chapter2-image" class="file-input" accept="image/*" required>
+                <span class="file-input-button">🎨 Choose image 2 in folder "Exercise 1"</span>
+              </div>
+              <div class="file-name" id="chapter2-filename"></div>
+            </div>
+            <div class="checkbox-wrapper">
+              <input type="checkbox" id="chapter2-decorative" class="checkbox-input">
+              <label for="chapter2-decorative" class="checkbox-label">Decorative image (no alt text needed)</label>
+            </div>
+
+            <div class="decorative-info" id="chapter2-info">
+              ℹ️ Decorative images are purely visual and don't add information to the content. They get an empty alt attribute (alt="") which tells screen readers to skip them.
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="chapter2-alt">Alternative text (describe the atmosphere)</label>
+              <input type="text" id="chapter2-alt" class="text-input" placeholder="E.g., 'Warm, inviting workspace with soft lighting creating a professional atmosphere'" required>
+            </div>
+            <button type="submit" class="submit-button">Add image to 1.2</button>
+          </form>
+
+          <div class="image-container uploaded-image" id="chapter2-image-container">
+            <img id="chapter2-display" class="content-image" alt="">
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <h3>1.3 Guiding users and search engines</h3>
+          <p style="margin: 0; max-width: none;">
+            <strong>Result preview:</strong>
+            Your uploaded image will become the only child of a clickable link, without additional text.</p>
+          <p style="margin: 10px 0 0 0; max-width: none; font-size: 0.9rem; color: var(--io-mid-grey);">Screen readers will announce: "Link, [your alt text]". The image must provide the text to describe the link's purpose via its alt attribute.</p>
+
+          <form class="image-upload-form" id="chapter3-form">
+            <div class="form-group">
+              <label class="form-label" for="chapter3-image">Upload an image about navigation/linking</label>
+              <div class="file-input-wrapper">
+                <input type="file" id="chapter3-image" class="file-input" accept="image/*" required>
+                <span class="file-input-button">🔗 Choose image 3 in folder "Exercise 1"</span>
+              </div>
+              <div class="file-name" id="chapter3-filename"></div>
+            </div>
+
+            <div class="checkbox-wrapper">
+              <input type="checkbox" id="chapter3-decorative" class="checkbox-input">
+              <label for="chapter3-decorative" class="checkbox-label">Decorative image (no alt text needed)</label>
+            </div>
+
+            <div class="decorative-info" id="chapter3-info">
+              ℹ️ Decorative images are purely visual and don't add information to the content. They get an empty alt attribute (alt="") which tells screen readers to skip them.
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="chapter3-alt">Alternative text (describe the navigation concept)</label>
+              <input type="text" id="chapter3-alt" class="text-input" placeholder="E.g., 'Website sitemap diagram showing internal linking structure and navigation paths'" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="chapter3-url">Link destination URL</label>
+              <input type="url" id="chapter3-url" class="text-input" placeholder="https://example.com/navigation-guide" required>
+            </div>
+            <button type="submit" class="submit-button">Add image to 1.3</button>
+          </form>
+
+          <div class="image-container uploaded-image" id="chapter3-image-container">
+            <a id="chapter3-link" href="" target="_blank" rel="noreferrer">
+              <img id="chapter3-display" class="content-image" alt="">
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="exercise">
+      <div class="container">
+        <h2>Exercise 2: Rich text editing</h2>
+      </div>
+      <section class="section">
+        <div class="container">
+          <h3>2.1 Headings, lists, links and tables</h3>
+          <div class="editor-container">
+            <div class="editor-instructions">
+              <p class="large-text">Use the editor below to practice creating accessible content</p>
+              <p>Available formatting options:</p>
+              <ul style="list-style: disc; margin-left: 20px; margin-top: 10px;">
+                <li>Headings (H2 through H6) for proper content hierarchy</li>
+                <li>Unordered lists for grouping related items</li>
+                <li>Ordered lists for step-by-step instructions</li>
+                <li>Links with purposeful text</li>
+                <li>Tables with header and body configuration</li>
+              </ul>
+              <p style="margin-top: 15px;">
+                <span class="text-blue">Accessibility tip:</span>
+                Always use headings in logical order and write descriptive link text!</p>
+            </div>
+
+            <textarea name="editor" id="accessible-editor" rows="15" cols="80">
+              <strong>Start writing your accessible content here</strong>
+              <p>Use 2-6 words of descriptive anchor text that summarizes the destination content,
+                                            Include primary keywords naturally within link text without over-optimization,
+                                            Avoid generic phrases: "click here" reduces SEO value by 73% compared to descriptive links,
+                                            Link to relevant pages within first 100 words: early links pass 43% more authority,
+                                            Maintain 2-5 internal links per 1000 words for optimal user experience and SEO,
+                                            Use contextual linking: links within relevant content paragraphs perform 2.3x better,
+                                            Implement breadcrumb navigation: improves site structure understanding by 56% and
+                                            Regularly audit broken internal links: they reduce user trust by 28% and SEO performance</p>
+              <a href="https://www.iodigital.com/en">Read more</a>
+              <table>
+                <tbody>
+                  <tr>
+                    <td>Feature</td>
+                    <td>Accessibility Benefit</td>
+                  </tr>
+                  <tr>
+                    <td>Table headers</td>
+                    <td>Screen readers can identify column/row relationships</td>
+                  </tr>
+                  <tr>
+                    <td>Clear cell content</td>
+                    <td>Easier navigation for all users</td>
+                  </tr>
+                </tbody>
+              </table>
+            </textarea>
+
+            <button type="button" class="generate-button" onclick="generatePreview()">Generate WYSIWYG preview</button>
+
+            <div id="editor-preview" class="editor-output">
+              <h3 style="color: var(--io-blue); margin-top: 0;">Your WYSIWYG content preview:</h3>
+              <div id="preview-content"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    let editorInstance;
+
+    // Initialize CKEditor 5 with limited toolbar
+    ClassicEditor.create(document.querySelector('#accessible-editor'), {
+      toolbar: {
+        items: [
+          'heading',
+          '|',
+          'bold',
+          'italic',
+          '|',
+          'bulletedList',
+          'numberedList',
+          '|',
+          'link',
+          '|',
+          'insertTable',
+          '|',
+          'removeFormat'
+        ]
+      },
+      heading: {
+        options: [
+          {
+            model: 'paragraph',
+            title: 'Paragraph',
+            class: 'ck-heading_paragraph'
+          },
+          {
+            model: 'heading2',
+            view: 'h2',
+            title: 'Heading 2',
+            class: 'ck-heading_heading2'
+          },
+          {
+            model: 'heading3',
+            view: 'h3',
+            title: 'Heading 3',
+            class: 'ck-heading_heading3'
+          },
+          {
+            model: 'heading4',
+            view: 'h4',
+            title: 'Heading 4',
+            class: 'ck-heading_heading4'
+          }, {
+            model: 'heading5',
+            view: 'h5',
+            title: 'Heading 5',
+            class: 'ck-heading_heading5'
+          }, {
+            model: 'heading6',
+            view: 'h6',
+            title: 'Heading 6',
+            class: 'ck-heading_heading6'
+          }
+        ]
+      },
+      table: {
+        contentToolbar: [
+          'tableColumn',
+          'tableRow',
+          'mergeTableCells',
+          'tableProperties',
+          'tableCellProperties'
+        ]
+      },
+      link: {
+        defaultProtocol: 'https://',
+        decorators: {
+          openInNewTab: {
+            mode: 'manual',
+            label: 'Open in a new tab',
+            attributes: {
+              target: '_blank',
+              rel: 'noreferrer'
+            }
+          },
+          downloadable: {
+            mode: 'manual',
+            label: 'Downloadable',
+            attributes: {
+              download: 'file'
+            }
+          }
+        }
+      },
+      removePlugins: ['MediaEmbedToolbar'],
+      placeholder: 'Start writing your accessible content here...'
+    }).then(editor => {
+      editorInstance = editor;
+
+      // Set initial content
+      editor.setData(`
+                    <strong>Start writing your accessible content here</strong>
+                    <p>Dolor, labore do adipiscing nostrud culpa aliquip laborum. Adipiscing nostrud culpa aliquip laborum. Culpa, aliquip laborum minim sunt. Minim sunt, commodo do et. Do et excepteur officia, aliquip sed mollit anim. Officia aliquip sed mollit anim minim esse velit. Sed mollit anim minim esse velit eu, magna. Minim esse velit eu. Velit eu magna sint aliquip, cupidatat irure nisi. Sint aliquip cupidatat irure nisi minim officia fugiat.</p>
+                `);
+    }).catch(error => {
+      console.error('Error initializing CKEditor 5:', error);
+    });
+
+    // Function to add visually hidden text to new tab links
+    function addVisuallyHiddenText(htmlContent) { // Create a temporary div to parse HTML
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = htmlContent;
+
+      // Find all links with target="_blank"
+      const newTabLinks = tempDiv.querySelectorAll('a[target="_blank"]');
+
+      newTabLinks.forEach(link => { // Check if visually hidden span doesn't already exist
+        const existingHiddenText = link.querySelector('.visually-hidden');
+        if (! existingHiddenText) { // Create and append the visually hidden span
+          const hiddenSpan = document.createElement('span');
+          hiddenSpan.className = 'visually-hidden';
+          hiddenSpan.textContent = ' (opens in a new tab)';
+          link.appendChild(hiddenSpan);
+        }
+      });
+
+      return tempDiv.innerHTML;
+    }
+
+    // Generate preview function
+    function generatePreview() {
+      if (! editorInstance) {
+        console.error('Editor not initialized');
+        return;
+      }
+
+      let editorData = editorInstance.getData();
+
+      // Process the content to add visually hidden text
+      editorData = addVisuallyHiddenText(editorData);
+
+      const previewContainer = document.getElementById('editor-preview');
+      const previewContent = document.getElementById('preview-content');
+
+      previewContent.innerHTML = editorData;
+      previewContainer.style.display = 'block';
+
+      // Scroll to preview
+      previewContainer.scrollIntoView({behavior: 'smooth'});
+    }
+
+    // Handle decorative image checkbox functionality
+    function setupDecorativeToggle(chapterNumber) {
+      const decorativeCheckbox = document.getElementById(`chapter${chapterNumber}-decorative`);
+      const altInput = document.getElementById(`chapter${chapterNumber}-alt`);
+      const infoBox = document.getElementById(`chapter${chapterNumber}-info`);
+
+      decorativeCheckbox.addEventListener('change', function () {
+        if (this.checked) { // Disable alt text input and show info
+          altInput.disabled = true;
+          altInput.required = false;
+          altInput.value = '';
+          altInput.placeholder = 'Alt text disabled for decorative image';
+          infoBox.style.display = 'block';
+        } else { // Enable alt text input and hide info
+          altInput.disabled = false;
+          altInput.required = true;
+          altInput.placeholder = altInput.getAttribute('data-original-placeholder') || 'Describe the image';
+          infoBox.style.display = 'none';
+        }
+      });
+
+      // Store original placeholder
+      const originalPlaceholder = altInput.placeholder;
+      altInput.setAttribute('data-original-placeholder', originalPlaceholder);
+    }
+
+    // Handle image upload forms
+    function setupImageUpload(chapterNumber) {
+      const form = document.getElementById(`chapter${chapterNumber}-form`);
+      const fileInput = document.getElementById(`chapter${chapterNumber}-image`);
+      const altInput = document.getElementById(`chapter${chapterNumber}-alt`);
+      const decorativeCheckbox = document.getElementById(`chapter${chapterNumber}-decorative`);
+      const filenameDiv = document.getElementById(`chapter${chapterNumber}-filename`);
+      const imageContainer = document.getElementById(`chapter${chapterNumber}-image-container`);
+      const displayImg = document.getElementById(`chapter${chapterNumber}-display`);
+
+      // Chapter 3 specific elements
+      const urlInput = chapterNumber === 3 ? document.getElementById(`chapter${chapterNumber}-url`) : null;
+      const linkElement = chapterNumber === 3 ? document.getElementById(`chapter${chapterNumber}-link`) : null;
+
+      // Show filename when file is selected
+      fileInput.addEventListener('change', function () {
+        if (this.files && this.files[0]) {
+          filenameDiv.textContent = `Selected: ${
+            this.files[0].name
+          }`;
+        } else {
+          filenameDiv.textContent = '';
+        }
+      });
+
+      // Handle form submission
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const file = fileInput.files[0];
+        const isDecorative = decorativeCheckbox.checked;
+        const altText = isDecorative ? '' : altInput.value.trim();
+        const url = urlInput ? urlInput.value.trim() : null;
+
+        // Validation: require either decorative checkbox or alt text
+        if (! file) {
+          alert('Please select an image file.');
+          return;
+        }
+
+        if (! isDecorative && ! altText) {
+          alert('Please provide alt text or mark the image as decorative.');
+          return;
+        }
+
+        // Chapter 3 specific validation
+        if (chapterNumber === 3 && ! url) {
+          alert('Please provide a URL for the link.');
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          displayImg.src = e.target.result;
+          displayImg.alt = altText;
+          // Will be empty string if decorative
+
+          // Chapter 3 specific: set the link href
+          if (chapterNumber === 3 && linkElement) {
+            linkElement.href = url;
+          }
+
+          // Hide form and show image
+          form.style.display = 'none';
+          imageContainer.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    // Initialize all chapters
+    setupImageUpload(1);
+    setupImageUpload(2);
+    setupImageUpload(3);
+
+    setupDecorativeToggle(1);
+    setupDecorativeToggle(2);
+    setupDecorativeToggle(3);
+  </script>
+</body></html>
+
